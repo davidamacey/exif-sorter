@@ -1,4 +1,4 @@
-FROM python:3.13-alpine
+FROM python:slim-trixie
 
 LABEL org.opencontainers.image.title="EXIF Sorter"
 LABEL org.opencontainers.image.description="Organize photos, videos, and audio files by EXIF/ID3 creation date"
@@ -7,8 +7,10 @@ LABEL org.opencontainers.image.source="https://github.com/davidamacey/exif-sorte
 LABEL org.opencontainers.image.documentation="https://github.com/davidamacey/exif-sorter#readme"
 LABEL org.opencontainers.image.licenses="MIT"
 
-# Install exiftool (perl-image-exiftool is in Alpine community repo)
-RUN apk add --no-cache perl-image-exiftool
+# Install exiftool (libimage-exiftool-perl provides the CLI binary on Debian)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libimage-exiftool-perl \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install exif-sorter from PyPI
 RUN pip install --no-cache-dir exif-sorter

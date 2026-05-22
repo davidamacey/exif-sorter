@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-05-22
+
+### Fixed
+
+- **Docker**: Switch base image from Alpine to Debian Trixie slim (`python:slim-trixie`) — Alpine's `perl-image-exiftool` package does not install the `exiftool` CLI binary, causing `sort` to fail with "exiftool not found"
+
 ## [1.1.0] - 2025-12-15
 
 ### Added
